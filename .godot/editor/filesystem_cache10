@@ -1,0 +1,31 @@
+ea4bc82a6ad023ab7ee23ee620429895
+::res://::1770315880
+ap_1.gd::GDScript/GDScript::8680230630529214952::1765862945::0::1::::<>MeshInstance3D<><>0<>0<><>::
+ap_2.gd::GDScript/GDScript::473844912005725303::1765862945::0::1::::<>MeshInstance3D<><>0<>0<><>::
+ap_3.gd::GDScript/GDScript::8866736598752792384::1765862945::0::1::::<>MeshInstance3D<><>0<>0<><>::
+ap_4.gd::GDScript/GDScript::4024572072050415529::1765862945::0::1::::<>MeshInstance3D<><>0<>0<><>::
+armor panel.tres::StandardMaterial3D::3526863440299889677::1769885686::0::1::::<><><>0<>0<><>::
+ballistics.gd::GDScript/GDScript::1758315377962222838::1765862945::0::1::::<>Node3D<><>0<>0<><>::
+ballistics_broyden_method.gd::GDScript/GDScript::7489811396306175256::1765862945::0::1::::<>Node3D<><>0<>0<><>::
+ballistic_path.gd::GDScript/GDScript::6974394415887717503::1761957013::0::1::::<>Path3D<><>0<>0<><>::
+camera.gd::GDScript/GDScript::5978333724830216139::1765862945::0::1::::FreeLookCamera<>Camera3D<><>0<>0<><>::
+camera_3d.gd::GDScript/GDScript::4304272566197344460::1761957013::0::1::::<>Camera3D<><>0<>0<><>::
+center_cpkf.gd::GDScript/GDScript::8198644039332723558::1766122117::0::1::::CenterCPKF<>Node<><>0<>0<><>::
+center_IMM.gd::GDScript/GDScript::2664990594552252944::1766124658::0::1::::CenterIMM<>Node<><>0<>0<><>::
+center_kf.gd::GDScript/GDScript::5336502815666539458::1766124827::0::1::::CenterCVKF<>Node<><>0<>0<><>::
+draw_debug.gd::GDScript/GDScript::5868293490520174402::1765862945::0::1::::<>Node<><>0<>0<><>::
+draw_debug_gbm.gd::GDScript::1132990947109027523::1769885732::0::1::::<>Node<><>0<>0<><>::
+icon.svg::CompressedTexture2D/CompressedTexture2D::1645946994338570401::1761957013::1761957013::1::::<><><>0<>0<>87297d689c0df885f27bed162fc68571<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
+lights.gd::GDScript/GDScript::882322450503964986::1765862945::0::1::::<>Node3D<><>0<>0<><>::
+line.gd::GDScript/GDScript::401549524813793496::1765862945::0::1::::<>Node3D<><>0<>0<><>::
+node_3d.tscn::PackedScene::4117505443810416426::1769885744::0::1::::<><><>0<>0<><>::uid://c8ivqbkiiw0ds::::res://slow_mo.gd<>uid://crf7jvfenad6r::::res://camera.gd<>uid://fyrpycyadlpw::::res://line.gd<>uid://deyedm6xh07b5::::res://ballistics_broyden_method.gd<>uid://be2rneppvmlqm::::res://turret.gd<>uid://qe3gv3x0cbjn::::res://draw_debug_gbm.gd<>uid://c4tq4inpmrdlc::::res://target_body.gd<>uid://n75nrjlta5e5::::res://position_projection.gd<>uid://d26cexl8x3j7x::::res://target.gd<>uid://bqio6p8auml5f::::res://armor panel.tres<>uid://dvw1eou2sopq3::::res://ap_1.gd<>uid://g0sfk46872cx::::res://ap_2.gd<>uid://mtnyspvkwp3w::::res://lights.gd<>uid://dyld4d6nlehhg::::res://ap_3.gd<>uid://bxlsd422rbmjp::::res://ap_4.gd<>uid://ck3vjhfahhh1k::::res://predictions.gd
+path_3d.gd::GDScript/GDScript::5680679340898778760::1761957013::0::1::::<>Path3D<><>0<>0<><>::
+position_projection.gd::GDScript/GDScript::980360687853498478::1765862945::0::1::::<>Node3D<><>0<>0<><>::
+predictions.gd::GDScript/GDScript::5533823885270551042::1766123342::0::1::::<>Node3D<><>0<>0<><>::
+radii_kalman_filter.gd::GDScript/GDScript::3479893379317954979::1765862945::0::1::::RadiiKF<>Node<><>0<>0<><>::
+README.md::TextFile/TextFile::-1::1762387429::0::1::::<><><>0<>0<><>::
+slow_mo.gd::GDScript/GDScript::7106891927370785164::1765862945::0::1::::<>Node3D<><>0<>0<><>::
+target.gd::GDScript/GDScript::9118486343404301739::1769119258::0::1::::<>Node3D<><>0<>0<><>::
+target_body.gd::GDScript/GDScript::6848564711091280364::1765862945::0::1::::<>RigidBody3D<><>0<>0<><>::
+transform2D_extension.gd::GDScript/GDScript::5904297500587894563::1765862945::0::1::::<>RefCounted<><>0<>0<><>::
+turret.gd::GDScript/GDScript::2723969895778184232::1765862945::0::1::::<>Node3D<><>0<>0<><>::
