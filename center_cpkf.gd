@@ -7,7 +7,7 @@ var P: float
 var Q: float = pow(0.005, 2)
 var x: float
 
-var R: float = pow(0.05, 2)
+var R: float = pow(0.4, 2)
 
 var innovation: float 
 var S: float

@@ -3,12 +3,25 @@ extends Node3D
 @onready var target = $"../Target/RigidBody3D" 
 @onready var center_prediction = $"center_predictions"
 @onready var center_prediction_cv =$"center_prediction_cv"
+@onready var center_prediction_ca = $"center_prediction_ca"
+@onready var center_raw = $"center_raw"
+@onready var center_prediction_position = $"center_prediction_position"
+@onready var center_prediction_imm_ca = $"center_prediction_imm_ca"
+@onready var center_prediction_imm_cv_ca = $"center_prediction_imm_cv_ca"
 
 var estimator: RadiiKF
 var x_center_IMMF: CenterIMM
 var y_center_IMMF: CenterIMM
 var x_center_CVKF: CenterCVKF
 var y_center_CVKF: CenterCVKF
+var x_center_CAKF: CenterCAKF
+var y_center_CAKF: CenterCAKF
+var x_center_CPKF: CenterCPKF
+var y_center_CPKF: CenterCPKF
+var x_center_IMM_CA: CenterIMM_CP_CA
+var y_center_IMM_CA: CenterIMM_CP_CA
+var x_center_IMM_CV_CA: CenterIMM_CV_CA
+var y_center_IMM_CV_CA: CenterIMM_CV_CA
 
 var radii_found: bool = false
 var radii_estimate: Vector2
@@ -21,18 +34,22 @@ var first_center_estimate: bool = true
 var count: int = 0
 
 func _process(delta: float) -> void:
-	var project_time: float = 0.1
+	var project_time: float = 0.2
 	
 	if not first_center_estimate:
 		var prediction1: Vector2
 		var prediction2: Vector2
+		var prediction3: Vector2
+		var prediction4: Vector2
+		var prediction5: Vector2
+		var prediction6: Vector2
 		#prediction1 = Vector2(
 			#x_center_IMMF.predict_estimate(project_time).x,
 			#y_center_IMMF.predict_estimate(project_time).x
 		#)
 		prediction1 = Vector2(
-			x_center_IMMF.get_estimation().x,
-			y_center_IMMF.get_estimation().x
+			x_center_IMMF.predict_estimate(project_time).x,
+			y_center_IMMF.predict_estimate(project_time).x
 		)
 		
 		#prediction2 = Vector2(
@@ -40,20 +57,64 @@ func _process(delta: float) -> void:
 			#y_center_CVKF.predict_estimate(project_time).x
 		#)
 		prediction2 = Vector2(
-			x_center_CVKF.get_estimation().x,
-			y_center_CVKF.get_estimation().x
+			x_center_CVKF.predict_estimate(project_time).x,
+			y_center_CVKF.predict_estimate(project_time).x
+		)
+		
+		prediction3 = Vector2(
+			x_center_CAKF.predict_estimate(project_time).x,
+			y_center_CAKF.predict_estimate(project_time).x
+		)
+		
+		prediction4 = Vector2(
+			x_center_CPKF.get_estimation(),
+			y_center_CPKF.get_estimation()
+		)
+		
+		prediction5 = Vector2(
+			x_center_IMM_CA.predict_estimate(project_time).x,
+			y_center_IMM_CA.predict_estimate(project_time).x
+		)
+		
+		prediction6 = Vector2(
+			x_center_IMM_CV_CA.predict_estimate(project_time).x,
+			y_center_IMM_CV_CA.predict_estimate(project_time).x
 		)
 		
 		center_prediction.position = Vector3(
-			prediction1.x,
+			_position_at(project_time).x,
 			0,
-			prediction1.y
+			_position_at(project_time).y
 		)
 		
 		center_prediction_cv.position = Vector3(
 			prediction2.x,
 			0,
 			prediction2.y
+		)
+		
+		center_prediction_ca.position = Vector3(
+			prediction3.x,
+			0,
+			prediction3.y
+		)
+		
+		center_prediction_position.position = Vector3(
+			prediction4.x,
+			0,
+			prediction4.y
+		)
+		
+		center_prediction_imm_ca.position = Vector3(
+			prediction5.x,
+			0,
+			prediction5.y
+		)
+		
+		center_prediction_imm_cv_ca.position = Vector3(
+			prediction6.x,
+			0,
+			prediction6.y
 		)
 			
 		
@@ -82,12 +143,30 @@ func _on_target_two_panels_visible(radii: Vector2, center: Vector2) -> void:
 			y_center_IMMF = CenterIMM.new(Vector2(center.y, 0))
 			x_center_CVKF = CenterCVKF.new(Vector2(center.x, 0))
 			y_center_CVKF = CenterCVKF.new(Vector2(center.y, 0))
+			x_center_CAKF = CenterCAKF.new(Vector3(center.x, 0, 0))
+			y_center_CAKF = CenterCAKF.new(Vector3(center.y, 0, 0))
+			x_center_CPKF = CenterCPKF.new(center.x)
+			y_center_CPKF = CenterCPKF.new(center.y)
+			x_center_IMM_CA = CenterIMM_CP_CA.new(Vector3(center.x, 0, 0))
+			y_center_IMM_CA = CenterIMM_CP_CA.new(Vector3(center.y, 0, 0))
+			x_center_IMM_CV_CA = CenterIMM_CV_CA.new(Vector3(center.x, 0, 0))
+			y_center_IMM_CV_CA = CenterIMM_CV_CA.new(Vector3(center.y, 0, 0))
+			center_raw.position = Vector3(center.x, 0, center.y)
 			first_center_estimate = false
 		else:
 			x_center_IMMF.update(center.x)
 			y_center_IMMF.update(center.y)
 			x_center_CVKF.update(center.x)
 			y_center_CVKF.update(center.y)
+			x_center_CAKF.update(center.x)
+			y_center_CAKF.update(center.y)
+			x_center_CPKF.update(center.x)
+			y_center_CPKF.update(center.y)
+			x_center_IMM_CA.update(center.x)
+			y_center_IMM_CA.update(center.y)
+			x_center_IMM_CV_CA.update(center.x)
+			y_center_IMM_CV_CA.update(center.y)
+			center_raw.position = Vector3(center.x, 0, center.y)
 			
 			#print("_____center_____")	
 			#print("pos estimation: ", Vector2(x_center_IMMF.get_estimation().x, y_center_IMMF.get_estimation().x))
@@ -120,12 +199,30 @@ func _on_target_one_panel_visible(pos: Vector2, unit_vec: Vector2, which_radii: 
 			y_center_IMMF = CenterIMM.new(Vector2(center.y, 0))
 			x_center_CVKF = CenterCVKF.new(Vector2(center.x, 0))
 			y_center_CVKF = CenterCVKF.new(Vector2(center.y, 0))
+			x_center_CAKF = CenterCAKF.new(Vector3(center.x, 0, 0))
+			y_center_CAKF = CenterCAKF.new(Vector3(center.y, 0, 0))
+			x_center_CPKF = CenterCPKF.new(center.x)
+			y_center_CPKF = CenterCPKF.new(center.y)
+			x_center_IMM_CA = CenterIMM_CP_CA.new(Vector3(center.x, 0, 0))
+			y_center_IMM_CA = CenterIMM_CP_CA.new(Vector3(center.y, 0, 0))
+			x_center_IMM_CV_CA = CenterIMM_CV_CA.new(Vector3(center.x, 0, 0))
+			y_center_IMM_CV_CA = CenterIMM_CV_CA.new(Vector3(center.y, 0, 0))
+			center_raw.position = Vector3(center.x, 0, center.y)
 			first_center_estimate = false
 		else:
 			x_center_IMMF.update(center.x)
 			y_center_IMMF.update(center.y)
 			x_center_CVKF.update(center.x)
 			y_center_CVKF.update(center.y)
+			x_center_CAKF.update(center.x)
+			y_center_CAKF.update(center.y)
+			x_center_CPKF.update(center.x)
+			y_center_CPKF.update(center.y)
+			x_center_IMM_CA.update(center.x)
+			y_center_IMM_CA.update(center.y)
+			x_center_IMM_CV_CA.update(center.x)
+			y_center_IMM_CV_CA.update(center.y)
+			center_raw.position = Vector3(center.x, 0, center.y)
 			
 			#print("_____center_____")	
 			#print("pos estimation: ", Vector2(x_center_IMMF.get_estimation().x, y_center_IMMF.get_estimation().x))
@@ -137,6 +234,14 @@ func _on_target_one_panel_visible(pos: Vector2, unit_vec: Vector2, which_radii: 
 			#print("mu: ", Vector2(x_center_IMMF.get_model_probablities().x, x_center_IMMF.get_model_probablities().y))
 			#print()
 
+func _position_at(t: float) -> Vector2:
+	var a: Vector3 = target.get_linear_acceleration()
+	var v: Vector3 = target.get_linear_velocity()
+	var p: Vector3 = target.get_position()
+
+	var pos: Vector3 = p + v*t + 0.5*a*t**2
+	
+	return Vector2(pos.x, pos.z)
 
 # Define the target location
 const TARGET_IP = "127.0.0.1" # Localhost
@@ -168,4 +273,4 @@ func _send_udp_message(model_probabilities: Vector2) -> void:
 
 func _on_timer_timeout() -> void:
 	if not first_center_estimate:
-		_send_udp_message(Vector2(x_center_IMMF.get_model_probablities().x, x_center_IMMF.get_model_probablities().y))
+		_send_udp_message(Vector2(x_center_IMM_CA.get_model_probablities().x, x_center_IMM_CA.get_model_probablities().y))

@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://bywsyilcp4dju"]
+[gd_scene load_steps=51 format=3 uid="uid://bywsyilcp4dju"]
 
 [ext_resource type="Script" uid="uid://c8ivqbkiiw0ds" path="res://slow_mo.gd" id="1_4arys"]
 [ext_resource type="Script" uid="uid://crf7jvfenad6r" path="res://camera.gd" id="1_noarx"]
@@ -84,6 +84,31 @@ albedo_color = Color(0.0627451, 1, 0.694118, 1)
 albedo_color = Color(0, 1, 0.521569, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_ealrb"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_tcnuu"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ealrb"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_i0g27"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jsnrv"]
+albedo_color = Color(0.362947, 0.0011871, 0.873831, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_jsnrv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lggff"]
+albedo_color = Color(0.765762, 0.349359, 0.306599, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_lggff"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s0gvp"]
+albedo_color = Color(1.11182e-05, 0.798343, 1.54018e-06, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vxd74"]
+albedo_color = Color(0.226573, 0.371602, 0.526917, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_dhlwf"]
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_4arys")
@@ -253,6 +278,7 @@ mesh = SubResource("SphereMesh_tuemg")
 
 [node name="center_prediction_cv" type="MeshInstance3D" parent="predictions"]
 transform = Transform3D(0.329, 0, 0, 0, 0.329, 0, 0, 0, 0.329, 0, 0, 0)
+visible = false
 material_override = SubResource("StandardMaterial3D_tuemg")
 material_overlay = SubResource("StandardMaterial3D_i0g27")
 mesh = SubResource("SphereMesh_ealrb")
@@ -260,6 +286,33 @@ mesh = SubResource("SphereMesh_ealrb")
 [node name="Timer" type="Timer" parent="predictions"]
 wait_time = 0.05
 autostart = true
+
+[node name="center_prediction_ca" type="MeshInstance3D" parent="predictions"]
+transform = Transform3D(0.32, 0, 0, 0, 0.32, 0, 0, 0, 0.32, 0, 0, 0)
+visible = false
+mesh = SubResource("SphereMesh_tcnuu")
+surface_material_override/0 = SubResource("StandardMaterial3D_ealrb")
+
+[node name="center_raw" type="MeshInstance3D" parent="predictions"]
+transform = Transform3D(0.32, 0, 0, 0, 0.32, 0, 0, 0, 0.32, 0, 0, 0)
+mesh = SubResource("SphereMesh_i0g27")
+surface_material_override/0 = SubResource("StandardMaterial3D_jsnrv")
+
+[node name="center_prediction_position" type="MeshInstance3D" parent="predictions"]
+transform = Transform3D(0.32, 0, 0, 0, 0.32, 0, 0, 0, 0.32, 0, 0, 0)
+visible = false
+mesh = SubResource("SphereMesh_jsnrv")
+surface_material_override/0 = SubResource("StandardMaterial3D_lggff")
+
+[node name="center_prediction_imm_ca" type="MeshInstance3D" parent="predictions"]
+transform = Transform3D(0.32, 0, 0, 0, 0.32, 0, 0, 0, 0.32, 0, 0, 0)
+mesh = SubResource("SphereMesh_lggff")
+surface_material_override/0 = SubResource("StandardMaterial3D_s0gvp")
+
+[node name="center_prediction_imm_cv_ca" type="MeshInstance3D" parent="predictions"]
+transform = Transform3D(0.32, 0, 0, 0, 0.32, 0, 0, 0, 0.32, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_vxd74")
+mesh = SubResource("SphereMesh_dhlwf")
 
 [connection signal="one_panel_visible" from="Target" to="predictions" method="_on_target_one_panel_visible"]
 [connection signal="two_panels_visible" from="Target" to="predictions" method="_on_target_two_panels_visible"]

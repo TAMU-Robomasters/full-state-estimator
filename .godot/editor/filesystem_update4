@@ -1,3 +1,10 @@
 res://node_3d.tscn
 res://draw_debug_gbm.gd
 res://armor panel.tres
+res://predictions.gd
+res://center_IMM_ca.gd
+res://target.gd
+res://center_ca_kf.gd
+res://center_cpkf.gd
+res://center_kf.gd
+res://center_IMM_cv_ca.gd

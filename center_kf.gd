@@ -1,7 +1,7 @@
 class_name CenterCVKF
 extends Node
 
-var accel_std_dev: float = 1
+var accel_std_dev: float = 0.1
 
 var past_t: float
 
@@ -30,7 +30,7 @@ func _get_Q(dt: float) -> Transform2D:
 	) * pow(accel_std_dev,2)
 var x: Vector2
 
-var R: float = pow(0.05, 2)
+var R: float = pow(0.2, 2)
 
 var S: float
 

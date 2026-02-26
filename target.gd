@@ -17,8 +17,9 @@ func _process(delta: float) -> void:
 	var u_perp: Vector2
 	var u2: Vector2
 	var rot: float
-	var rot_noise: float = deg_to_rad(randfn(0, 10))
-	var rot_offsets: Array = [deg_to_rad(10), deg_to_rad(-10)]
+	const angle_noise: float = 5
+	var rot_noise: float = deg_to_rad(randfn(0, angle_noise))
+	var rot_offsets: Array = [deg_to_rad(angle_noise), deg_to_rad(-angle_noise)]
 	var position_noise: Vector2 = Vector2(randfn(0, 0.05),randfn(0, 0.05)) # 5 cm
 	var config: int = -1
 	var panel_id: int = -1
